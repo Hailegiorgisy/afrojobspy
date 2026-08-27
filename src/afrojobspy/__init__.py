@@ -9,6 +9,11 @@ from afrojobspy.scrapers.aujobs import AUJobsScraper
 from afrojobspy.scrapers.brightermonday import BrighterMondayScraper
 from afrojobspy.scrapers.hahujobs import HahuJobsScraper
 from afrojobspy.scrapers.geezjobs import GeezJobsScraper
+from afrojobspy.models import JobPost
+from afrojobspy.scrapers.ethiojobs import EthiojobsScraper
+from afrojobspy.scrapers.geezjobs import GeezJobsScraper
+
+__version__ = "0.1.0"
 
 logger = logging.getLogger(__name__)
 

@@ -6,11 +6,11 @@ from afrojobspy.models import JobPost
 
 logger = logging.getLogger(__name__)
 
-class HahuJobsScraper(BaseScraper):
-    """Scraper for HaHuJobs Ethiopia"""
+class DerejaScraper(BaseScraper):
+    """Scraper for Dereja Portal"""
     def __init__(self, proxies: Optional[List[str]] = None):
         super().__init__(proxies=proxies)
-        self.base_url = "https://www.hahu.jobs/jobs"
+        self.base_url = "https://dereja.com/jobs"
         self.session.headers.update({
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -19,20 +19,16 @@ class HahuJobsScraper(BaseScraper):
     def scrape(self, search_term: str = "", location: str = "", results_wanted: int = 10) -> List[JobPost]:
         jobs = []
         try:
-            # Query the explicit jobs directory page with parameters
             response = self.session.get(self.base_url, timeout=15)
             if response.status_code != 200:
                 return jobs
             
             soup = BeautifulSoup(response.text, "html.parser")
-            
-            # HaHuJobs lists positions with structured card blocks or anchor components
-            # Let's check card wrappers or links that have heading texts inside them
-            cards = soup.select("div.card, article, div.job-card, .search-result-item, a[href*='/jobs/']")
+            cards = soup.select("div.job-item, article, div.card, a[href*='/job'], div.listings")
             
             seen_urls = set()
             for card in cards:
-                link = card if card.name == "a" else card.find("a")
+                link = card if card.name == "a" else card.find("a", href=True)
                 if not link:
                     continue
                 
@@ -41,15 +37,13 @@ class HahuJobsScraper(BaseScraper):
                 
                 if not job_url or not title or len(title) < 5:
                     continue
-                
-                if any(skip in title.lower() for skip in ["home", "login", "register", "about", "contact", "privacy", "terms", "explore more"]):
+                if any(skip in title.lower() for skip in ["home", "login", "register", "about", "contact", "privacy", "terms"]):
                     continue
 
                 if not job_url.startswith("http"):
-                    job_url = "https://www.hahu.jobs" + job_url if job_url.startswith("/") else f"https://www.hahu.jobs/{job_url}"
+                    job_url = "https://dereja.com" + job_url if job_url.startswith("/") else f"https://dereja.com/{job_url}"
 
                 job_url = job_url.split("?")[0]
-
                 if job_url in seen_urls:
                     continue
                 seen_urls.add(job_url)
@@ -57,25 +51,16 @@ class HahuJobsScraper(BaseScraper):
                 if search_term and search_term.lower() not in title.lower():
                     continue
 
-                # Try to extract company name if present nearby in the card container
-                company = "HaHuJobs Employer"
-                if card.name != "a":
-                    comp_elem = card.select_one(".company-name, .employer, h4, h5")
-                    if comp_elem:
-                        comp_text = comp_elem.get_text(strip=True)
-                        if comp_text and len(comp_text) < 50:
-                            company = comp_text
-
                 jobs.append(JobPost(
                     title=title,
-                    company=company,
+                    company="Dereja Partner",
                     location=location or "Ethiopia",
-                    site_name="hahujobs",
+                    site_name="dereja",
                     job_url=job_url
                 ))
                 
                 if len(jobs) >= results_wanted:
                     break
         except Exception as e:
-            logger.error(f"HaHuJobs scrape error: {e}")
+            logger.error(f"Dereja scrape error: {e}")
         return jobs
