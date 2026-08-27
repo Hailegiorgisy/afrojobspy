@@ -1,5 +1,6 @@
 import logging
-from typing import List
+import json
+from typing import List, Optional
 from bs4 import BeautifulSoup
 from afrojobspy.scrapers.base import BaseScraper
 from afrojobspy.models import JobPost
@@ -8,13 +9,14 @@ logger = logging.getLogger(__name__)
 
 class EthiojobsScraper(BaseScraper):
     """
-    Scraper implementation for Ethiojobs (ethiojobs.net).
+    Robust scraper implementation for Ethiojobs (ethiojobs.net) 
+    extracting data directly from Next.js server-side JSON payloads.
     """
-    def __init__(self, proxies=None):
+    def __init__(self, proxies: Optional[List[str]] = None):
         super().__init__(proxies=proxies)
-        self.base_url = "https://www.ethiojobs.net/jobs/"
+        self.base_url = "https://ethiojobs.net/jobs"
 
-    def scrape(self, search_term: str, location: str, results_wanted: int) -> List[JobPost]:
+    def scrape(self, search_term: str = "", location: str = "", results_wanted: int = 10) -> List[JobPost]:
         jobs: List[JobPost] = []
         
         try:
@@ -24,69 +26,58 @@ class EthiojobsScraper(BaseScraper):
                 return jobs
             
             soup = BeautifulSoup(response.text, "html.parser")
+            tag = soup.find("script", id="__NEXT_DATA__")
             
-            # Target listing blocks or general job article nodes on Ethiojobs
-            cards = soup.select(".job-ad-item, .listing-item, article, .content-row, .job-item")
+            if not tag or not tag.string:
+                logger.warning("Ethiojobs __NEXT_DATA__ payload not found.")
+                return jobs
+                
+            data = json.loads(tag.string)
+            jobs_payload = data.get("props", {}).get("pageProps", {}).get("jobs", {})
+            jobs_list = jobs_payload.get("data", [])
             
-            # Fallback if specific classes change: find elements containing job links
-            if not cards:
-                cards = soup.find_all("div", class_=lambda x: x and "job" in x.lower())
-
-            for card in cards:
+            for item in jobs_list:
                 if len(jobs) >= results_wanted:
                     break
                     
-                try:
-                    a_tag = card.find("a", href=True)
-                    if not a_tag:
-                        continue
-                        
-                    job_url = a_tag["href"]
-                    if not ("/job/" in job_url or "/jobs/" in job_url or "display-job" in job_url):
-                        # Try to find any internal link inside the card
-                        internal_a = card.find("a", href=lambda h: h and ("/job/" in h or "detail" in h))
-                        if internal_a:
-                            a_tag = internal_a
-                            job_url = a_tag["href"]
-                        else:
-                            continue
-
-                    title = a_tag.text.strip()
-                    if not title or len(title) < 4 or title.lower() in ["apply now", "view details", "read more", "apply"]:
-                        # Try looking for a header tag inside the card
-                        h_tag = card.find(["h2", "h3", "h4"])
-                        if h_tag and h_tag.text.strip():
-                            title = h_tag.text.strip()
-                        else:
-                            continue
-
-                    if search_term and search_term.lower() not in title.lower():
-                        card_text = card.get_text().lower()
-                        if search_term.lower() not in card_text:
-                            continue
-
-                    if not job_url.startswith("http"):
-                        job_url = "https://www.ethiojobs.net" + job_url
-                        
-                    comp_el = card.find(class_=["company", "employer", "organization", "company-name"])
-                    company = comp_el.text.strip() if comp_el else "Ethiojobs Employer"
-                    
-                    job_id = job_url.split("/")[-1] or "unknown"
-                    
-                    if any(j.job_url == job_url for j in jobs):
-                        continue
-                        
-                    jobs.append(JobPost(
-                        id=job_id,
-                        title=title,
-                        company=company,
-                        location=location or "Ethiopia",
-                        site_name="ethiojobs",
-                        job_url=job_url
-                    ))
-                except Exception:
+                title = item.get("title", "").strip()
+                slug = item.get("slug", "")
+                job_id = str(item.get("id", ""))
+                
+                if not title:
                     continue
                     
+                # Filter client-side if search_term is supplied
+                if search_term and search_term.lower() not in title.lower():
+                    desc = item.get("description", "")
+                    if search_term.lower() not in desc.lower():
+                        continue
+                        
+                # Construct clean job detail link
+                job_url = f"https://ethiojobs.net/job/{slug}" if slug else self.base_url
+                
+                # Extract company name safely
+                company_obj = item.get("company", {})
+                company_name = "Ethiojobs Employer"
+                if isinstance(company_obj, dict):
+                    company_name = company_obj.get("name") or company_obj.get("company_name") or "Ethiojobs Employer"
+                elif isinstance(company_obj, str):
+                    company_name = company_obj
+
+                description = item.get("description", "")
+                date_posted = item.get("date_published")
+
+                jobs.append(JobPost(
+                    id=job_id,
+                    title=title,
+                    company=company_name,
+                    location=location or "Ethiopia",
+                    site_name="ethiojobs",
+                    job_url=job_url,
+                    description=description,
+                    date_posted=date_posted
+                ))
+                
         except Exception as e:
             logger.error(f"Ethiojobs scrape error: {e}")
             

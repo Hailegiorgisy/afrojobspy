@@ -8,8 +8,13 @@ src/afrojobspy.egg-info/dependency_links.txt
 src/afrojobspy.egg-info/requires.txt
 src/afrojobspy.egg-info/top_level.txt
 src/afrojobspy/scrapers/__init__.py
+src/afrojobspy/scrapers/afriwork.py
+src/afrojobspy/scrapers/aujobs.py
 src/afrojobspy/scrapers/base.py
+src/afrojobspy/scrapers/brightermonday.py
 src/afrojobspy/scrapers/ethiojobs.py
+src/afrojobspy/scrapers/geezjobs.py
+src/afrojobspy/scrapers/hahujobs.py
 src/afrojobspy/scrapers/jobberman.py
 src/afrojobspy/scrapers/myjobmag.py
 src/afrojobspy/scrapers/reliefweb.py
