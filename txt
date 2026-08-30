@@ -1,0 +1,192 @@
+{
+      "name": "BrighterMonday Kenya",
+      "base_url": "https://www.brightermonday.co.ke",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "div[role='article'], div.job-card",
+      "title_selector": "a.text-black, h3 a",
+      "company_selector": "a.text-gray-500",
+      "location_selector": ".job-location",
+      "region": "East Africa"
+    },
+    {
+      "name": "Jobberman Nigeria",
+      "base_url": "https://www.jobberman.com",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "div[role='article'], div.job-card",
+      "title_selector": "a.text-black",
+      "company_selector": "a.text-gray-500",
+      "location_selector": ".job-location",
+      "region": "West Africa"
+    },
+    {
+      "name": "MyJobMag Africa",
+      "base_url": "https://www.myjobmag.com",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "li.job-list-li, div.mag--box",
+      "title_selector": "h2 a, h3 a",
+      "company_selector": ".job-comp-name",
+      "location_selector": ".job-loc",
+      "region": "Pan-Africa",
+      "last_successful_url": "https://www.myjobmag.com/jobs?q=Public+Health",
+      "status": "Active"
+    },
+    {
+      "name": "Careers24 South Africa",
+      "base_url": "https://www.careers24.com",
+      "search_path": "/jobs/q-{query}/",
+      "card_selector": "div.job-card, div.row-job",
+      "title_selector": "h2 a, a.job-title",
+      "company_selector": ".company-name",
+      "location_selector": ".location",
+      "region": "Southern Africa"
+    },
+    {
+      "name": "Fuzu",
+      "base_url": "https://www.fuzu.com",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "div.job-card-item, div.chakra-card",
+      "title_selector": "h3 a",
+      "company_selector": ".organization-name",
+      "location_selector": ".job-location",
+      "region": "East Africa"
+    },
+    {
+      "name": "NGO Jobs in Africa",
+      "base_url": "https://ngojobsinafrica.com",
+      "search_path": "/?s={query}",
+      "card_selector": "article.post, div.job-item",
+      "title_selector": "h2.title a, h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "JobnetAfrica",
+      "base_url": "https://jobnetafrica.com",
+      "search_path": "/jobs/?s={query}",
+      "card_selector": "div.job_listing, article",
+      "title_selector": "h3 a, a.title",
+      "company_selector": ".company-name",
+      "location_selector": ".location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "Afriwork",
+      "base_url": "https://afriworket.com",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "div.job-card, div.task-item",
+      "title_selector": "h3 a, h4 a",
+      "company_selector": ".company-name",
+      "location_selector": ".location",
+      "region": "Ethiopia"
+    },
+    {
+      "name": "Remote4Africa",
+      "base_url": "https://remote4africa.com",
+      "search_path": "/?s={query}",
+      "card_selector": "article.job-listing, div.job-card",
+      "title_selector": "h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "Remote"
+    },
+    {
+      "name": "DevelopmentAid Africa",
+      "base_url": "https://www.developmentaid.org",
+      "search_path": "/jobs/search?q={query}",
+      "card_selector": "div.job-item, tr.job-row",
+      "title_selector": "a.job-title, h4 a",
+      "company_selector": ".organization-name",
+      "location_selector": ".job-location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "ReliefWeb Africa",
+      "base_url": "https://reliefweb.int",
+      "search_path": "/jobs?search={query}",
+      "card_selector": "article.card, div.node--type-job",
+      "title_selector": "h2 a, h3 a",
+      "company_selector": ".rw-card-header__source",
+      "location_selector": ".rw-card-header__country",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "Glassdoor South Africa",
+      "base_url": "https://www.glassdoor.com",
+      "search_path": "/Job/south-africa-{query}-jobs-SRCH_IL.0,12_IN208_KO13,25.htm",
+      "card_selector": "li.JobsList_jobListItem__wjJKV",
+      "title_selector": "a.JobCard_jobTitle__GLyJ1",
+      "company_selector": "span.JobCard_employerName__Rvt9t",
+      "location_selector": "span.JobCard_location__N_DBm",
+      "region": "Southern Africa"
+    },
+    {
+      "name": "LinkedIn Jobs Africa",
+      "base_url": "https://www.linkedin.com",
+      "search_path": "/jobs/search?keywords={query}&location=Africa",
+      "card_selector": "div.base-card, li.result-card",
+      "title_selector": "h3.base-search-card__title",
+      "company_selector": "h4.base-search-card__subtitle",
+      "location_selector": "span.job-search-card__location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "JobWeb Kenya",
+      "base_url": "https://jobwebkenya.com",
+      "search_path": "/jobs?s={query}",
+      "card_selector": "div.job-list, article",
+      "title_selector": "h2 a, h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "East Africa"
+    },
+    {
+      "name": "JobWeb Nigeria",
+      "base_url": "https://jobwebnigeria.com",
+      "search_path": "/jobs?s={query}",
+      "card_selector": "div.job-list, article",
+      "title_selector": "h2 a, h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "West Africa"
+    },
+    {
+      "name": "Quantum Jobs Africa",
+      "base_url": "https://www.quantumjobsafrica.com",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "div.job-card",
+      "title_selector": "h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "Careers in Africa",
+      "base_url": "https://www.careerinafrica.com",
+      "search_path": "/jobs/?search={query}",
+      "card_selector": "div.job-item, article",
+      "title_selector": "h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "Placid Express Jobs Africa",
+      "base_url": "https://www.jobboardafrica.com",
+      "search_path": "/jobs?q={query}",
+      "card_selector": "div.job-listing",
+      "title_selector": "h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "Pan-Africa"
+    },
+    {
+      "name": "GoCareers Nigeria",
+      "base_url": "https://gocareers.ng",
+      "search_path": "/jobs?s={query}",
+      "card_selector": "div.job-card",
+      "title_selector": "h3 a",
+      "company_selector": ".company",
+      "location_selector": ".location",
+      "region": "West Africa"
+    }
