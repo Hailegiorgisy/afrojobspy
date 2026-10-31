@@ -1,0 +1,21 @@
+config = {
+    "name": "Ethiojobs",
+    "base_url": "https://ethiojobs.net",
+    "search_path": "/jobs",
+    "extraction_type": "next_data_json",
+    "payload_path": "props.pageProps.jobs.data",
+    "title_key": "title",
+    "slug_key": "slug",
+    "id_key": "id",
+    "company_key": "company",
+    "location_key": "location",
+    "description_key": "description",
+    "date_key": "date_published",
+    "region": "Ethiopia"
+}
+
+scraper = DeepScraper(config=config)
+jobs = scraper.scrape(search_term="developer", results_wanted=10)
+
+for job in jobs:
+    print(f"[{job.company}] {job.title} - {job.job_url}")

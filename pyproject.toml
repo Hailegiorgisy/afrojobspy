@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "afrojobspy"
+version = "0.2.0"
+description = "Concurrent job scraping library for African employment platforms"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Hailegiorgis Yirgu Habtie", email = "hailegiorgis@users.noreply.github.com" }
+]
+maintainers = [
+    { name = "Hailegiorgis Yirgu Habtie" }
+]
+keywords = [
+    "jobs", "scraper", "africa", "ethiopia", "kenya", "nigeria",
+    "employment", "labour-market", "pandas", "pydantic"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "pydantic>=2.0.0",
+    "pandas>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+export = [
+    "openpyxl>=3.1.0",
+    "pyarrow>=14.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Hailegiorgisy/afrojobspy"
+Repository = "https://github.com/Hailegiorgisy/afrojobspy"
+Issues = "https://github.com/Hailegiorgisy/afrojobspy/issues"
+Documentation = "https://github.com/Hailegiorgisy/afrojobspy#readme"
+
+[project.scripts]
+afrojobspy = "afrojobspy.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+afrojobspy = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
