@@ -7,7 +7,8 @@ import random
 import re
 import time
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List, Optional
+# Line 10
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import requests
 
@@ -49,15 +50,15 @@ class BaseScraper(ABC):
     - Exponential-backoff retries on transient network / 5xx errors
     - Text normalisation helpers
     """
-
-    DEFAULT_TIMEOUT = 18
+# Lines 53–62
+    DEFAULT_TIMEOUT: Tuple[int, int] = (5, 15)
     MAX_RETRIES = 3
     BACKOFF_BASE = 1.4  # seconds
 
     def __init__(
         self,
         proxies: Optional[List[str]] = None,
-        timeout: int = DEFAULT_TIMEOUT,
+        timeout: Union[int, float, Tuple[int, int]] = DEFAULT_TIMEOUT,
         max_retries: int = MAX_RETRIES,
     ):
         self.session = requests.Session()

@@ -23,9 +23,8 @@ class ReliefWebScraper(BaseScraper):
             params["country"] = location
 
         try:
-            response = self.session.get(self.base_url, params=params, timeout=10)
-            if response.status_code != 200:
-                logger.warning(f"Failed to fetch ReliefWeb HTML page. Status: {response.status_code}")
+           response = self._safe_get(self.base_url, params=params)
+            if response is None:
                 return jobs
             
             soup = BeautifulSoup(response.text, "html.parser")
