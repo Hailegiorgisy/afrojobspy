@@ -2,9 +2,10 @@
 
 **AfroJobsPy** is a modular, concurrent Python library that aggregates job listings from major African employment platforms into a single normalised pandas DataFrame.
 
-[![PyPI version](https://img.shields.io/pypi/v/afrojobspy.svg)](https://pypi.org/project/afrojobspy/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[[https://img.shields.io/pypi/v/afrojobspy.svg]](https://pypi.org/project/afrojobspy/)
+[[https://img.shields.io/badge/License-MIT-yellow.svg]](https://opensource.org/licenses/MIT)
+[[https://img.shields.io/badge/python-3.9+-blue.svg]](https://www.python.org/downloads/)
+[[https://zenodo.org/badge/DOI/10.5281/zenodo.24303425.svg]](https://doi.org/10.5281/zenodo.24303425)
 
 ---
 
@@ -161,10 +162,11 @@ If you use AfroJobsPy in research, please cite:
 
 ```bibtex
 @software{habtie_afrojobspy_2026,
-  author = {Habtie, Hailegiorgis Yirgu},
-  title  = {AfroJobsPy: Concurrent Job Scraping for African Labour Markets},
-  year   = {2026},
-  url    = {https://github.com/Hailegiorgisy/afrojobspy},
+  author  = {Habtie, Hailegiorgis Yirgu},
+  title   = {AfroJobsPy: Concurrent Job Scraping for African Labour Markets},
+  year    = {2026},
+  url     = {https://github.com/Hailegiorgisy/afrojobspy},
+  doi     = {10.5281/zenodo.24303425},
   version = {0.2.0}
 }
 ```
