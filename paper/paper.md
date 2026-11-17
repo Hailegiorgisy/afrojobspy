@@ -10,12 +10,12 @@ tags:
   - open source
 authors:
   - name: Hailegiorgis Yirgu Habtie
-    orcid: # ADD YOUR ORCID
+    orcid: 0000-0002-3801-1560
     affiliation: "1"
 affiliations:
-  - name: Independent researcher / dataKitchen, Addis Ababa, Ethiopia
+  - name: Ease-Africa, Addis Ababa, Ethiopia
     index: 1
-date: 31 October 2026
+date: 17 November 2026
 bibliography: paper.bib
 ---
 
